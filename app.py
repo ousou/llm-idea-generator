@@ -56,14 +56,14 @@ def get_response(prompt, history=""):
     return response.text
 
 async def llm1_turn(topic):
-    history = ""
+    history = f"The discussion topic is: {topic}\\n"
     for chat in st.session_state.chat_history:
         history += chat["speaker"] + ": " + chat["message"] + "\\n"
     llm1_response = get_response(llm1_prompt, history)
     st.session_state.chat_history.append({"speaker": "LLM 1", "message": llm1_response})
 
-async def llm2_turn(llm1_response):
-    history = ""
+async def llm2_turn(topic):
+    history = f"The discussion topic is: {topic}\\n"
     for chat in st.session_state.chat_history:
         history += chat["speaker"] + ": " + chat["message"] + "\\n"
     llm2_response = get_response(llm2_prompt, history)
@@ -79,18 +79,17 @@ def display_chat_history():
                 st.write(f'<div style="text-align: left; padding-left: 300px; background-color:#f0f2f5;padding:10px;border-radius:5px;">{chat["speaker"]}: {chat["message"]}</div>', unsafe_allow_html=True)
             else:
                 st.write(f'<div style="text-align: right; padding-right: 300px; background-color:#e2e3e5;padding:10px;border-radius:5px;">{chat["speaker"]}: {chat["message"]}</div>', unsafe_allow_html=True)
-            message_counter += 1
-
+                message_counter += 1
 chat_placeholder = st.empty()
 if st.button("Go!"):
     display_chat_history()
     if st.session_state.chat_history:
         last_llm2_response = st.session_state.chat_history[-1]["message"]
         with st.spinner("LLM 1 is generating a response..."):
-            asyncio.run(llm1_turn(last_llm2_response))
+            asyncio.run(llm1_turn(topic))
     else:
         with st.spinner("LLM 1 is generating a response..."):
             asyncio.run(llm1_turn(topic))
     with st.spinner("LLM 2 is generating a response..."):
-        asyncio.run(llm2_turn(st.session_state.chat_history[-1]["message"]))
+        asyncio.run(llm2_turn(topic))
     display_chat_history()
