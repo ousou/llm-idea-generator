@@ -23,11 +23,11 @@ div.stTextInput input {
 </style>
 """, unsafe_allow_html=True)
 
-st.title("LLM Discussion")
+st.title("LLM Idea Refiner")
 
-llm1_prompt = st.text_area("LLM 1 System Prompt", "You are a human in conversation with another human. You are a novice who wants to learn about the topic at hand. You ask questions about things you don't grasp.")
-llm2_prompt = st.text_area("LLM 2 System Prompt", "You are a human in conversation with another human. You are a knowledgeable expert giving concise answers to questions, and probe with clarifying questions to check the understanding of the other person when needed.")
-topic = st.text_input("Discussion Topic", "The future of AI")
+llm1_prompt = st.text_area("LLM 1 System Prompt", "You generate an idea on the given topic, and refine it based on the feedback from the other person. Be concise, though give more details if the counterpart ask for them.")
+llm2_prompt = st.text_area("LLM 2 System Prompt", "You critique ideas given by your counterpart and score them from 0 to 10. Give clear and actionable feedback. Be concise. Be very critical! Question all parts of the idea.")
+topic = st.text_area("What to generate ideas on?", "The future of AI")
 
 import asyncio
 
@@ -56,14 +56,14 @@ def get_response(prompt, history=""):
     return response.text
 
 async def llm1_turn(topic):
-    history = f"The discussion topic is: {topic}\\n"
+    history = f"The task is: {topic}\\n"
     for chat in st.session_state.chat_history:
         history += chat["speaker"] + ": " + chat["message"] + "\\n"
     llm1_response = get_response(llm1_prompt, history)
     st.session_state.chat_history.append({"speaker": "LLM 1", "message": llm1_response})
 
 async def llm2_turn(topic):
-    history = f"The discussion topic is: {topic}\\n"
+    history = f"The task is: {topic}\\n"
     for chat in st.session_state.chat_history:
         history += chat["speaker"] + ": " + chat["message"] + "\\n"
     llm2_response = get_response(llm2_prompt, history)
