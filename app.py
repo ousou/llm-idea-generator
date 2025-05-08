@@ -1,6 +1,8 @@
 
 import streamlit as st
 from google import genai
+import asyncio
+
 
 # Streamlit UI
 st.markdown("""
@@ -20,7 +22,6 @@ llm1_prompt = st.text_area("LLM 1 System Prompt", "You generate an idea on the g
 llm2_prompt = st.text_area("LLM 2 System Prompt", "You critique ideas given by your counterpart and score them from 0 to 10. Give clear and actionable feedback. Be concise. Be very critical! Question all parts of the idea.")
 topic = st.text_area("What to generate ideas on?", "The future of AI")
 
-import asyncio
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
