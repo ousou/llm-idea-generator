@@ -45,15 +45,8 @@ MODEL_NAME = st.secrets["gemini"].get("model2", "gemini-2.0-flash-001")
 
 # Function to get a response from the model
 def get_response(prompt, history=""):
-    #generation_config = genai.GenerationConfig(
-    #    temperature=0.5,
-    #    top_p=1.0,
-    #    top_k=1,
-    #    max_output_tokens=2048,
-    #)
-
     prompt_parts = [prompt + "\\n\\n" + history]
-
+    
     response = client.models.generate_content(
         model=MODEL_NAME,
         contents=prompt_parts,
@@ -90,7 +83,6 @@ chat_placeholder = st.empty()
 if st.button("Go!"):
     display_chat_history()
     if st.session_state.chat_history:
-        last_llm2_response = st.session_state.chat_history[-1]["message"]
         with st.spinner("LLM 1 is generating a response..."):
             asyncio.run(llm1_turn(topic))
     else:
