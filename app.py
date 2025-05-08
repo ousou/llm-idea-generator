@@ -1,15 +1,6 @@
 
 import streamlit as st
 from google import genai
-from google.genai import types
-
-# Set up Google Gemini API
-GOOGLE_API_KEY = st.secrets["GEMINI_API_KEY"]
-
-# Model to use
-MODEL_NAME = 'gemini-2.0-flash-001'
-
-import streamlit as st
 
 # Streamlit UI
 st.markdown("""
@@ -35,7 +26,21 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 # Initialize the generative model
-client = genai.Client(api_key=GOOGLE_API_KEY)
+if st.secrets["gemini"].get("vertexai", False):
+    client = genai.Client(
+        project="iprally-ai-dev",
+        location="global",
+        vertexai=True,
+    )
+elif st.secrets["gemini"].get("api_key"):
+    client = genai.Client(api_key=st.secrets["gemini"].get("api_key"))
+else:
+    raise ValueError("No API key or vertexai credentials provided in secrets.toml")
+
+# Model to use
+MODEL_NAME = st.secrets["gemini"].get("model2", "gemini-2.0-flash-001")
+
+
 
 # Function to get a response from the model
 def get_response(prompt, history=""):
