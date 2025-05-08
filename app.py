@@ -1,4 +1,3 @@
-
 import streamlit as st
 from google import genai
 import asyncio
@@ -75,10 +74,10 @@ def display_chat_history():
         message_counter = 0
         for chat in st.session_state.chat_history:
             if message_counter % 2 == 0:
-                st.write(f'<div style="text-align: left; padding-left: 300px; background-color:#f0f2f5;padding:10px;border-radius:5px;">{chat["speaker"]}: {chat["message"]}</div>', unsafe_allow_html=True)
+                st.write(f'<div style="padding-left: 300px; background-color:#f0f2f5;padding:10px;border-radius:5px;">{chat["speaker"]}: {chat["message"]}</div>', unsafe_allow_html=True)
             else:
-                st.write(f'<div style="text-align: right; padding-right: 300px; background-color:#e2e3e5;padding:10px;border-radius:5px;">{chat["speaker"]}: {chat["message"]}</div>', unsafe_allow_html=True)
-                message_counter += 1
+                st.write(f'<div style="padding-right: 300px; background-color:#e2e3e5;padding:10px;border-radius:5px;">{chat["speaker"]}: {chat["message"]}</div>', unsafe_allow_html=True)
+            message_counter += 1
 chat_placeholder = st.empty()
 if st.button("Go!"):
     display_chat_history()
