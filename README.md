@@ -1,11 +1,21 @@
-# Getting started
 
-## Installing dependencies
+# LLM idea generator
 
-Run the script bin/init to install all dependencies.
+A simple application that generates and refines ideas on a given topic, by having one LLM generate the ideas and another LLM score and critique the ideas. You can then run multiple iterations to improve the idea.
 
+You need access to the Gemini api to use the tool. Both Vertex AI API and Gemini API are supported.
 
-## Configuring the Gemini API
+## Getting started
+
+### Installing dependencies
+
+Run the following command to install all dependencies:
+
+```bash
+bin/init
+```
+
+### Configuring the Gemini API
 
 Create a file .streamlit/secrets.toml and add the configuration for using Gemini. 
 
@@ -29,6 +39,17 @@ model = "gemini-2.0-flash-001"
 ```
 
 
-## Starting the application
+### Starting the application
 
-Run bin/serve to start the app.
+If using the Vertex AI API, first authenticate using gcloud. This is not needed if using Gemini API:
+
+```bash
+gcloud auth application-default login
+```
+
+Run the following command to start the app:
+
+```bash
+bin/serve
+```
+
