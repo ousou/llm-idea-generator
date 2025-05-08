@@ -19,7 +19,7 @@ st.title("LLM Idea Refiner")
 
 idea_generator_prompt = st.text_area("Idea Generator System Prompt", "You generate an idea on the given topic, and refine it based on the feedback from the other person. Be concise, though give more details if the counterpart ask for them.")
 idea_critic_prompt = st.text_area("Idea Critic System Prompt", "You critique ideas given by your counterpart and score them from 0 to 10. Give clear and actionable feedback. Be concise. Be very critical! Question all parts of the idea.")
-topic = st.text_area("What to generate ideas on?", "The future of AI")
+topic = st.text_area("What to generate ideas on?", "A fun thing to do with friends on the weekend.")
 
 
 if "chat_history" not in st.session_state:
