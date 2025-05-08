@@ -15,7 +15,7 @@ div.stTextInput input {
 </style>
 """, unsafe_allow_html=True)
 
-st.title("LLM Idea Refiner")
+st.title("LLM Idea Generator")
 
 idea_generator_prompt = st.text_area("Idea Generator System Prompt", "You generate an idea on the given topic, and refine it based on the feedback from the other person. Be concise, though give more details if the counterpart ask for them.")
 idea_critic_prompt = st.text_area("Idea Critic System Prompt", "You critique ideas given by your counterpart and score them from 0 to 10. Give clear and actionable feedback. Be concise. Be very critical! Question all parts of the idea.")
