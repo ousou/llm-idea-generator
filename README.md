@@ -24,7 +24,7 @@ Example if you use the Vertex AI API:
 ```toml
 [gemini]
 vertexai = true
-project = <project_name>
+project = "<gcp_project_name>"
 location = "global"
 model = "gemini-2.0-flash-001"
 ```
@@ -34,7 +34,7 @@ Example if you use the Gemini API:
 ```toml
 [gemini]
 vertexai = false
-api_key = <gemini_api_key>
+api_key = "<gemini_api_key>"
 model = "gemini-2.0-flash-001"
 ```
 
