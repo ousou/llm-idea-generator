@@ -5,7 +5,13 @@ A simple application that generates and refines ideas on a given topic, by havin
 
 You need access to the Gemini api to use the tool. Both Vertex AI API and Gemini API are supported.
 
-## Getting started
+[App screenshot](images/llm_idea_generator.png)
+
+## How to use
+
+Write the topic you want to generate an idea on to the textbox **What to generate ideas on?**. Press **Go!** to start the process. When the responses have arrived, press **Go!** again to refine the idea further. Continue for as long as you like.
+
+## Setup
 
 ### Installing dependencies
 
