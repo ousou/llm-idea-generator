@@ -38,7 +38,7 @@ else:
     raise ValueError("No API key or vertexai credentials provided in secrets.toml")
 
 # Model to use
-MODEL_NAME = st.secrets["gemini"].get("model2", "gemini-2.0-flash-001")
+MODEL_NAME = st.secrets["gemini"].get("model", "gemini-2.0-flash-001")
 
 
 
